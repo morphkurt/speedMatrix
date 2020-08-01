@@ -1,17 +1,55 @@
 <html>
 
 <head>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>When your network is bad, you make pretty graphs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <link rel="stylesheet" href="css/default.css">
 </head>
 
 <body>
-    <div id="root">
-        <div id="svg">
-            <svg width="500" height="500"> 
-                <svg-path v-for="speedtest in values" :speedtest="speedtest"/>
-            </svg>
+    <section class="section">
+        <div id="root" class="container">
+            <div class="columns is-mobile is-centered is-vcentered">
+                <div class="column is-half">
+                    <h1 class="has-text-centered">When your network is bad, you make pretty graphs!!</h1>
+                </div>
+            </div>
+            <div class="columns is-mobile is-centered is-vcentered">
+                <div id="svg" style="width: 80vw; height: 40vw;">
+                    <svg viewBox="0 0 600 300">
+                        <template v-for="i in values">
+                            <a>
+                                <g>
+                                    <rect :x="i.x" :y="i.y" :width="i.w" :height="i.h" :fill="i.fill" stroke="white">
+                                        <title> {{ i.t }}</title>
+                                    </rect>
+                                </g>
+                            </a>
+                        </template>
+                        <template v-for="i in xAxis">
+                            <a>
+                                <g>
+                                    <line :x1="i.x" :y1="i.y" :x2="i.x2" :y2="i.y2" style="stroke:#4a4a4a;stroke-width:1" />
+                                    <text :x="i.tx" :y="i.ty" class="small"> {{ i.text }}</text>
+                                </g>
+                            </a>
+                        </template>
+                        <template v-for="i in yAxis">
+                            <a>
+                                <g>
+                                    <!--line :x1="i.x" :y1="i.y" :x2="i.x2" :y2="i.y2" style="stroke:#4a4a4a;stroke-width:1" /-->
+                                    <text :x="i.tx" :y="i.ty" class="small"> {{ i.text }}</text>
+                                </g>
+                            </a>
+                        </template>
+
+                    </svg>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="js/app.js"></script>
