@@ -18,7 +18,23 @@
             </div>
             <div class="columns is-mobile is-centered is-vcentered">
                 <div id="svg" style="width: 80vw; height: 40vw;">
-                    <svg viewBox="0 0 600 300">
+                    <svg viewBox="0 0 600 330">
+                        <template v-for="i in legend">
+                            <a>
+                                <g>
+                                    <rect :x="i.x" :y="i.y" :width="i.w" :height="i.h" :fill="i.fill" stroke="white">
+                                    </rect>
+                                    <text :x="i.tx" :y="i.ty" class="small"> {{ i.text }}</text>
+                                </g>
+                            </a>
+                        </template>
+                        <template v-for="i in legendText">
+                            <a>
+                                <g>
+                                    <text :x="i.tx" :y="i.ty" class="small"> {{ i.text }}</text>
+                                </g>
+                            </a>
+                        </template>
                         <template v-for="i in values">
                             <a>
                                 <g>
@@ -31,7 +47,8 @@
                         <template v-for="i in xAxis">
                             <a>
                                 <g>
-                                    <line :x1="i.x" :y1="i.y" :x2="i.x2" :y2="i.y2" style="stroke:#4a4a4a;stroke-width:1" />
+                                    <line :x1="i.x" :y1="i.y" :x2="i.x2" :y2="i.y2"
+                                        style="stroke:#4a4a4a;stroke-width:1" />
                                     <text :x="i.tx" :y="i.ty" class="small"> {{ i.text }}</text>
                                 </g>
                             </a>
@@ -39,7 +56,6 @@
                         <template v-for="i in yAxis">
                             <a>
                                 <g>
-                                    <!--line :x1="i.x" :y1="i.y" :x2="i.x2" :y2="i.y2" style="stroke:#4a4a4a;stroke-width:1" /-->
                                     <text :x="i.tx" :y="i.ty" class="small"> {{ i.text }}</text>
                                 </g>
                             </a>

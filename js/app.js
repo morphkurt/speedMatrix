@@ -5,9 +5,12 @@ var root = new Vue({
     el: "#root",
     data: {
         values: null,
+        legendHeight: 50,
         svgWidth: 600,
-        svgHeight: 300,
+        svgHeight: 330,
         margin: 25,
+        legend: [],
+        legendText: [],
         xAxis: [],
         yAxis: []
     },
@@ -29,6 +32,7 @@ var root = new Vue({
                 })
             this.drawXaxis(minDate, moment());
             this.drawYaxis(24);
+            this.drawLegend(9, minDate, moment())
 
             this.values = speedtest;
         },
@@ -37,14 +41,14 @@ var root = new Vue({
             let svgWidth = this.svgWidth;
             let svgHeight = this.svgHeight;
             let startX = margin
-            let startY = margin
+            let startY = (margin * 0.9) + this.legendHeight
             let daysToRender = moment(maxDate).diff(moment(minDate), 'days') + 1
             let w = (svgWidth - (2 * margin)) / daysToRender
-            let h = (svgHeight - (2 * margin)) / maxHours
+            let h = (svgHeight - (this.legendHeight) - (2 * margin)) / maxHours
             let x = startX + (moment(date).diff(moment(minDate), 'days') + 1) * w;
             let y = startY + Number(hour.replace(":00", "")) * h;
             // console.log(hour)
-            var alpha = 1 - ((value - 5) / 45);
+            var alpha = 1 - ((value - 3) / 45);
             return {
                 x: x,
                 y: y,
@@ -81,8 +85,8 @@ var root = new Vue({
             let margin = this.margin;
             let svgWidth = this.svgWidth;
             let svgHeight = this.svgHeight;
-            let startY = margin
-            let h = (svgHeight - (2 * margin)) / hours
+            let startY = margin + this.legendHeight;
+            let h = (svgHeight - this.legendHeight - (2 * margin)) / hours
             for (let i = 0; i < hours; i++) {
                 let y = startY + i * h + (h / 2);
                 if (i % 3 == 0) {
@@ -98,7 +102,68 @@ var root = new Vue({
                 }
 
             }
+        },
+        drawLegend: function (interval, minDate, maxDate) {
+            let margin = this.margin;
+            let svgWidth = this.svgWidth;
+            let svgHeight = this.svgHeight;
+            let startY = margin;
+            let daysToRender = moment(maxDate).diff(moment(minDate), 'days') + 1
+            let w = (svgWidth - (2 * margin)) / daysToRender
+            let legendLength = w * interval;
+            let startX = ((svgWidth - (2 * margin)) - legendLength) / 2;
+            let val = 5;
+            let h = (svgHeight - (2 * margin)) / 24
+            for (let i = 0; i < interval; i++) {
+
+                let x = startX + (w * i)
+                var alpha = 1 - ((val - 3) / 45);
+                this.legend.push({
+                    x: x,
+                    y: margin * 0.6,
+                    w: w,
+                    h: h,
+                    t: `${val}`,
+                    fill: `rgba(33,171,205,${alpha})`
+                })
+                this.legend.push({
+                    x: x,
+                    y: margin * 0.6 + h,
+                    w: w,
+                    h: h,
+                    t: `${val}`,
+                    fill: `rgba(230,85,13,${alpha})`
+                })
+                    this.legendText.push({
+                        tx: x + w * (0.33),
+                        ty: (margin * 0.6) + 3 * h,
+                        text: `${Math.floor(val)}`
+                    })
+                    this.legendText.push({
+                        tx: x + w * (0.33),
+                        ty: (margin * 0.6) + 3 * h,
+                        text: `${Math.floor(val)}`
+                    })
+                    val = val + 5
+            }
+            this.legendText.push({
+                tx: startX-50,
+                ty: (margin * 0.5) + h,
+                text: `Uniti Wireless`
+            })
+            this.legendText.push({
+                tx: startX-30,
+                ty: (margin * 0.5) + 2* h,
+                text: `iPrimus`
+            })      
+            this.legendText.push({
+                tx:  startX + legendLength,
+                ty: (margin * 0.6) + 3 * h,
+                text: ` (Mbps)`
+            })
+
         }
+
 
     }
 
