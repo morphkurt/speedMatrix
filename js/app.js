@@ -52,9 +52,11 @@ var root = new Vue({
             return {
                 x: x,
                 y: y,
+                tx: x + w / 4,
+                ty: y + w /2.3,
                 w: w,
                 h: h,
-                t: `${value} Mbps on ${moment(date).format('DD-MM-YYYY')} ${hour}`,
+                t: `${value}`,
                 fill: (moment(date).isAfter(moment("2020-07-29T10:00:00"))) ? `rgba(33,171,205,${alpha})` : `rgba(230,85,13,${alpha})`
             }
         },
@@ -134,30 +136,30 @@ var root = new Vue({
                     t: `${val}`,
                     fill: `rgba(230,85,13,${alpha})`
                 })
-                    this.legendText.push({
-                        tx: x + w * (0.33),
-                        ty: (margin * 0.6) + 3 * h,
-                        text: `${Math.floor(val)}`
-                    })
-                    this.legendText.push({
-                        tx: x + w * (0.33),
-                        ty: (margin * 0.6) + 3 * h,
-                        text: `${Math.floor(val)}`
-                    })
-                    val = val + 5
+                this.legendText.push({
+                    tx: x + w * (0.33),
+                    ty: (margin * 0.6) + 3 * h,
+                    text: `${Math.floor(val)}`
+                })
+                this.legendText.push({
+                    tx: x + w * (0.33),
+                    ty: (margin * 0.6) + 3 * h,
+                    text: `${Math.floor(val)}`
+                })
+                val = val + 5
             }
             this.legendText.push({
-                tx: startX-50,
+                tx: startX - 50,
                 ty: (margin * 0.5) + h,
                 text: `Uniti Wireless`
             })
             this.legendText.push({
-                tx: startX-30,
-                ty: (margin * 0.5) + 2* h,
+                tx: startX - 30,
+                ty: (margin * 0.5) + 2 * h,
                 text: `iPrimus`
-            })      
+            })
             this.legendText.push({
-                tx:  startX + legendLength,
+                tx: startX + legendLength,
                 ty: (margin * 0.6) + 3 * h,
                 text: ` (Mbps)`
             })

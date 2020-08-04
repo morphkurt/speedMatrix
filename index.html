@@ -32,8 +32,8 @@
                             <a>
                                 <g>
                                     <rect :x="i.x" :y="i.y" :width="i.w" :height="i.h" :fill="i.fill" stroke="white">
+                                        <text :x="i.tx" :y="i.ty" class="small"> {{ i.text }}</text>
                                     </rect>
-                                    <text :x="i.tx" :y="i.ty" class="small"> {{ i.text }}</text>
                                 </g>
                             </a>
                         </template>
@@ -48,8 +48,8 @@
                             <a>
                                 <g>
                                     <rect :x="i.x" :y="i.y" :width="i.w" :height="i.h" :fill="i.fill" stroke="white">
-                                        <title> {{ i.t }}</title>
                                     </rect>
+                                    <text :x="i.tx" :y="i.ty" id="rate" class="small"> {{ i.t }}</text>
                                 </g>
                             </a>
                         </template>

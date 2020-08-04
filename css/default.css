@@ -1,1 +1,5 @@
 .small { font: normal 8px sans-serif; color: #4a4a4a;}
+
+
+#rate {display: none;}
+svg g:hover #rate {display: block;}
