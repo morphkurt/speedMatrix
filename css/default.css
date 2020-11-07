@@ -2,4 +2,6 @@
 
 
 #rate {display: none;}
-svg g:hover #rate {display: block;}
+svg g:hover #rate {display: block; color: #4a4a4a } 
+
+

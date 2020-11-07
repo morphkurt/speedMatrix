@@ -16,12 +16,12 @@ var root = new Vue({
     },
     methods: {
         load: function () {
-            let minDate = moment().subtract(1, "month");
+            let minDate = moment().subtract(4, "month");
             let speedtest = [];
             fetch('https://s3-ap-southeast-2.amazonaws.com/speedtest.damitha.xyz/data/30day-matrix.json')
                 .then(response => response.json())
                 .then(d => {
-                    let maxDate = moment();
+                    let maxDate = moment()
                     let maxHours = 24;
                     d.data.forEach(result => {
                         let v = this.draw(minDate, maxDate, maxHours, result.x, result.y, result.v)
@@ -53,7 +53,7 @@ var root = new Vue({
                 x: x,
                 y: y,
                 tx: x + w / 4,
-                ty: y + w /2.3,
+                ty: y + w / 2.3,
                 w: w,
                 h: h,
                 t: `${value}`,
@@ -69,7 +69,7 @@ var root = new Vue({
             let w = (svgWidth - (2 * margin)) / daysToRender
             for (let i = 0; i < daysToRender + 1; i++) {
                 let x = startX + i * w + (w / 2);
-                if (i % 5 == 0) {
+                if (i % 10 == 0) {
                     this.xAxis.push({
                         x: x,
                         y: svgHeight - margin * 0.8,
@@ -110,7 +110,9 @@ var root = new Vue({
             let svgWidth = this.svgWidth;
             let svgHeight = this.svgHeight;
             let startY = margin;
-            let daysToRender = moment(maxDate).diff(moment(minDate), 'days') + 1
+            //   let daysToRender = moment(maxDate).diff(moment(minDate), 'days') + 1
+            let daysToRender = 30
+
             let w = (svgWidth - (2 * margin)) / daysToRender
             let legendLength = w * interval;
             let startX = ((svgWidth - (2 * margin)) - legendLength) / 2;

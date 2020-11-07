@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="columns is-mobile is-centered is-vcentered">
-                <div id="svg" style="width: 80vw; height: 40vw;">
+                <div id="svg" style="width: 90vw; height: 60vw;">
                     <svg viewBox="0 0 600 330">
                         <template v-for="i in legend">
                             <a>
@@ -47,9 +47,10 @@
                         <template v-for="i in values">
                             <a>
                                 <g>
-                                    <rect :x="i.x" :y="i.y" :width="i.w" :height="i.h" :fill="i.fill" stroke="white">
+                                    <rect id="block" :x="i.x" :y="i.y" :width="i.w" :height="i.h" :fill="i.fill"
+                                        stroke="white">
                                     </rect>
-                                    <text :x="i.tx" :y="i.ty" id="rate" class="small"> {{ i.t }}</text>
+                                    <!--text :x="i.tx" :y="i.ty" id="rate" class="small"> {{ i.t }}</text-->
                                 </g>
                             </a>
                         </template>
